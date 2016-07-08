@@ -12,6 +12,5 @@ public class LEDStart extends Job {
     @Override
     public void task() {
         SoftPwm.softPwmWrite(21, 100);
-        SoftPwm.softPwmWrite(0, 100);
     }
 }

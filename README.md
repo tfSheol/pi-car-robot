@@ -1,5 +1,15 @@
 # Pi API Robot
 
+## Install
+```
+    git clone git@gitlab.com:tfSheol/pi-api-robot.git
+    sudo mvn clean compile package
+    sudo chmod 744 ./scripts/update.sh
+    sudo chmod 744 ./target/launcher.sh
+    cd ./target
+    sudo ./launcher.sh
+```
+
 ## OUTPUT
 
 ### LED

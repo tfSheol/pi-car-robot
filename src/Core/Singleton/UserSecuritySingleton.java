@@ -198,4 +198,8 @@ public class UserSecuritySingleton {
             }
         }
     }
+
+    public int getNbToken() {
+        return users.size();
+    }
 }

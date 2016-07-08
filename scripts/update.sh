@@ -1,4 +1,5 @@
 #!/bin/sh
+sudo pkill -f 'java -jar'
 cd ../
 sudo -u pi git pull
 sudo mvn clean compile package

@@ -7,6 +7,7 @@ import Core.Http.Oauth2;
 import Core.Methode;
 import Core.Route;
 import Plugin.Motor.Model.MotorModel;
+import com.pi4j.wiringpi.SoftPwm;
 import org.json.JSONObject;
 
 /**
@@ -17,6 +18,7 @@ public class MotorController {
     @Methode("GET")
     @Route("/motor/set/{pin}/{speed}")
     public MotorModel setMotor(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
+        SoftPwm.softPwmCreate(args.getInt("pin"), 0, 100);
         return new MotorModel().setSpeed(socket, args.getInt("pin"), args.getInt("speed"));
     }
 }

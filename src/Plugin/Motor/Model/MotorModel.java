@@ -11,13 +11,8 @@ import com.pi4j.wiringpi.SoftPwm;
 @Controller
 public class MotorModel extends Model {
     public MotorModel setSpeed(String socket, int pin, int speed) {
-        try {
-            ServerSingleton.getInstance().log(socket, "[MOTOR] -> Speed is set to " + speed + "% in pin " + pin);
-            SoftPwm.softPwmWrite(pin, speed);
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ServerSingleton.getInstance().log(socket, "[MOTOR] -> Speed is set to " + speed + "% in pin " + pin);
+        SoftPwm.softPwmWrite(pin, speed);
         return this;
     }
 }

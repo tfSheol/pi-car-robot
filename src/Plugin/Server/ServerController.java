@@ -12,9 +12,7 @@ import Plugin.Server.Model.ServerModel;
 import com.pi4j.wiringpi.SoftPwm;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Created by teddy on 29/05/2016.
@@ -38,17 +36,9 @@ public class ServerController {
     public Model updateServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         try {
             SoftPwm.softPwmWrite(2, 100);
-            Runtime r = Runtime.getRuntime();
-            Process p = r.exec("../scripts/update.sh");
-            p.waitFor();
-            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-            while ((line = b.readLine()) != null) {
-                System.out.println(line);
-            }
-            b.close();
+            Runtime.getRuntime().exec("../scripts/update.sh");
             System.exit(1);
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return new Model();

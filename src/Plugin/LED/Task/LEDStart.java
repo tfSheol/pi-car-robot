@@ -11,6 +11,6 @@ import com.pi4j.wiringpi.SoftPwm;
 public class LEDStart extends Job {
     @Override
     public void task() {
-        SoftPwm.softPwmWrite(21, 100);
+        SoftPwm.softPwmWrite(7, 100);
     }
 }

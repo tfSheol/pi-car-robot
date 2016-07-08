@@ -12,7 +12,7 @@ import com.pi4j.wiringpi.SoftPwm;
 public class LEDTestTask extends Job {
     @Override
     public void task() {
-        if (UserSecuritySingleton.getInstance().getNbUsers() > 0) {
+        if (UserSecuritySingleton.getInstance().getNbUsers() > 1) {
             SoftPwm.softPwmWrite(7, 100);
         } else {
             SoftPwm.softPwmWrite(7, 0);

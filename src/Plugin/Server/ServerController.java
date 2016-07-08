@@ -57,6 +57,7 @@ public class ServerController {
     @Methode("GET")
     @Route("/server/stop")
     public Model stopServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
+        SoftPwm.softPwmWrite(2, 100);
         SoftPwm.softPwmWrite(21, 0);
         System.exit(1);
         return new Model();

@@ -37,8 +37,9 @@ public class ServerController {
         try {
             SoftPwm.softPwmWrite(7, 0);
             Runtime.getRuntime().exec("../scripts/update.sh");
+            Thread.sleep(10000);
             System.exit(1);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return new Model();

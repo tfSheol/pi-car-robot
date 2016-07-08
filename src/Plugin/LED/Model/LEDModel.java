@@ -19,15 +19,15 @@ public class LEDModel extends Model {
         } else if (id == 4) {
             SoftPwm.softPwmWrite(21, power);
         } else if (id == 0) {
-            disableAllLED();
+            allLed(power);
         }
         return this;
     }
 
-    public void disableAllLED() {
-        SoftPwm.softPwmWrite(2, 0);
-        SoftPwm.softPwmWrite(21, 0);
-        SoftPwm.softPwmWrite(7, 0);
-        SoftPwm.softPwmWrite(0, 0);
+    public void allLed(int power) {
+        SoftPwm.softPwmWrite(2, power);
+        SoftPwm.softPwmWrite(21, power);
+        SoftPwm.softPwmWrite(7, power);
+        SoftPwm.softPwmWrite(0, power);
     }
 }

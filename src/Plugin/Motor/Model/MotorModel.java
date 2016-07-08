@@ -18,8 +18,8 @@ public class MotorModel extends Model {
             SoftPwm.softPwmWrite(25, speed);
         } else if (speed < 0) {
             disableMotorPlus();
-            SoftPwm.softPwmWrite(28, speed);
-            SoftPwm.softPwmWrite(29, speed);
+            SoftPwm.softPwmWrite(28, speed * -1);
+            SoftPwm.softPwmWrite(29, speed * -1);
         } else {
             disableMotorPlus();
             disableMotorMinus();

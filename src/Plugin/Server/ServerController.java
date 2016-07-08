@@ -35,13 +35,20 @@ public class ServerController {
     @Route("/server/stop")
     public Model stopServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         try {
-            SoftPwm.softPwmWrite(7, 0);
+            SoftPwm.softPwmWrite(2, 100);
             Runtime.getRuntime().exec("../scripts/update.sh");
-            Thread.sleep(10000);
             System.exit(1);
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        return new Model();
+    }
+
+    @Methode("GET")
+    @Route("/server/stop/all")
+    public Model stopServerAllService(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
+        SoftPwm.softPwmWrite(7, 0);
+        System.exit(1);
         return new Model();
     }
 }

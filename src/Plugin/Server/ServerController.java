@@ -9,7 +9,10 @@ import Core.Model;
 import Core.Route;
 import Plugin.Server.Model.EmailModel;
 import Plugin.Server.Model.ServerModel;
+import com.pi4j.wiringpi.SoftPwm;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Created by teddy on 29/05/2016.
@@ -31,7 +34,13 @@ public class ServerController {
     @Methode("GET")
     @Route("/server/stop")
     public Model stopServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
-        System.exit(1);
+        try {
+            SoftPwm.softPwmWrite(7, 0);
+            Runtime.getRuntime().exec("../scripts/update.sh");
+            System.exit(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new Model();
     }
 }

@@ -1,5 +1,6 @@
 package Plugin.Motor;
 
+import Core.Controller;
 import Core.Http.Header;
 import Core.Http.Map;
 import Core.Http.Oauth2;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 /**
  * Created by teddy on 08/07/2016.
  */
+@Controller
 public class MotorController {
     @Methode("GET")
     @Route("/motor/set/{speed}")

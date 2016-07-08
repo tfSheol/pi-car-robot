@@ -29,7 +29,7 @@ public class MotorModel extends Model {
 
     private void disableMotorPlus() {
         SoftPwm.softPwmWrite(24, 0);
-        SoftPwm.softPwmWrite(24, 0);
+        SoftPwm.softPwmWrite(25, 0);
     }
 
     private void disableMotorMinus() {

@@ -12,7 +12,9 @@ import Plugin.Server.Model.ServerModel;
 import com.pi4j.wiringpi.SoftPwm;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created by teddy on 29/05/2016.
@@ -32,21 +34,29 @@ public class ServerController {
     }
 
     @Methode("GET")
-    @Route("/server/stop")
-    public Model stopServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
+    @Route("/server/update")
+    public Model updateServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         try {
             SoftPwm.softPwmWrite(2, 100);
-            Runtime.getRuntime().exec("../scripts/update.sh");
+            Runtime r = Runtime.getRuntime();
+            Process p = r.exec("../scripts/update.sh");
+            p.waitFor();
+            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = b.readLine()) != null) {
+                System.out.println(line);
+            }
+            b.close();
             System.exit(1);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return new Model();
     }
 
     @Methode("GET")
-    @Route("/server/stop/all")
-    public Model stopServerAllService(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
+    @Route("/server/stop")
+    public Model stopServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         SoftPwm.softPwmWrite(21, 0);
         System.exit(1);
         return new Model();

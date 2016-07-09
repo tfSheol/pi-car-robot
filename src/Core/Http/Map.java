@@ -22,11 +22,20 @@ public class Map extends HashMap {
         return -1;
     }
 
+    public Boolean getBoolean(Object key) {
+        try {
+            return Boolean.valueOf(get(key).toString());
+        } catch (NumberFormatException e) {
+            ServerSingleton.getInstance().log("[SERVER] -> Map.getBoolean : " + e, true);
+        }
+        return false;
+    }
+
     public String getString(Object key) {
         try {
             return String.valueOf(URLDecoder.decode(get(key).toString(), CHARSET));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            ServerSingleton.getInstance().log("[SERVER] -> Map.getString : " + e, true);
         }
         return null;
     }

@@ -15,8 +15,8 @@ import org.json.JSONObject;
 @Controller
 public class MotorController {
     @Methode("GET")
-    @Route("/motor/set/{speed}")
+    @Route("/motor/set/{l}/{r}/{speed}")
     public MotorModel setMotor(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
-        return new MotorModel().setSpeed(socket, args.getInt("speed"));
+        return new MotorModel().setSpeed(socket, args.getBoolean("l"), args.getBoolean("r"), args.getInt("speed"));
     }
 }

@@ -10,21 +10,32 @@ import com.pi4j.wiringpi.SoftPwm;
  */
 @Controller
 public class MotorModel extends Model {
-    public MotorModel setSpeed(String socket, int speed) {
+    public MotorModel setSpeed(String socket, boolean l, boolean r, int speed) {
         ServerSingleton.getInstance().log(socket, "[MOTOR] -> Speed is set to " + speed + "%");
         if (speed > 0) {
             disableMotorMinus();
-            SoftPwm.softPwmWrite(24, speed);
-            SoftPwm.softPwmWrite(25, speed);
+            controlDirection(24, 25, l, r, speed);
         } else if (speed < 0) {
             disableMotorPlus();
-            SoftPwm.softPwmWrite(28, speed * -1);
-            SoftPwm.softPwmWrite(29, speed * -1);
+            controlDirection(28, 29, l, r, speed * -1);
         } else {
             disableMotorPlus();
             disableMotorMinus();
         }
         return this;
+    }
+
+    private void controlDirection(int pin_m1, int pin_m2, boolean l, boolean r, int speed) {
+        if ((!l & !r) || (r & l)) {
+            SoftPwm.softPwmWrite(pin_m1, speed);
+            SoftPwm.softPwmWrite(pin_m2, speed);
+        } else if (!l & r) {
+            SoftPwm.softPwmWrite(pin_m1, speed / 2);
+            SoftPwm.softPwmWrite(pin_m2, speed);
+        } else {
+            SoftPwm.softPwmWrite(pin_m1, speed);
+            SoftPwm.softPwmWrite(pin_m2, speed / 2);
+        }
     }
 
     private void disableMotorPlus() {

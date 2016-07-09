@@ -7,6 +7,7 @@ sudo rm -rf ./target
 sudo -u pi git pull
 sleep 10
 sudo -u pi mvn clean compile package
+sleep 20
 cd ./target
 sudo chmod 744 ./launcher.sh
 sleep 5

@@ -13,15 +13,9 @@ public class MotorModel extends Model {
     public MotorModel setSpeed(String socket, boolean l, boolean r, int speed) {
         ServerSingleton.getInstance().log(socket, "[MOTOR] -> Speed is set to " + speed + "%");
         if (speed != 0) {
-            try {
-                startRotate(l, r, speed / 3);
-                Thread.sleep(500);
-                startRotate(l, r, speed / 2);
-                Thread.sleep(500);
-                startRotate(l, r, speed);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            startRotate(l, r, speed / 3);
+            startRotate(l, r, speed / 2);
+            startRotate(l, r, speed);
         } else {
             disableMotorPlus();
             disableMotorMinus();

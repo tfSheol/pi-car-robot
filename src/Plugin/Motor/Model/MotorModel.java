@@ -30,11 +30,11 @@ public class MotorModel extends Model {
             SoftPwm.softPwmWrite(pin_m1, speed);
             SoftPwm.softPwmWrite(pin_m2, speed);
         } else if (!l & r) {
-            SoftPwm.softPwmWrite(pin_m1, speed / 2);
+            SoftPwm.softPwmWrite(pin_m1, speed / 5);
             SoftPwm.softPwmWrite(pin_m2, speed);
         } else {
             SoftPwm.softPwmWrite(pin_m1, speed);
-            SoftPwm.softPwmWrite(pin_m2, speed / 2);
+            SoftPwm.softPwmWrite(pin_m2, speed / 5);
         }
     }
 

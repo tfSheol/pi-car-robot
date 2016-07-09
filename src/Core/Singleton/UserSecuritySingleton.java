@@ -200,6 +200,12 @@ public class UserSecuritySingleton {
     }
 
     public int getNbToken() {
-        return users.size();
+        int i = 0;
+        for (HashMap<String, Object> user : users) {
+            if (!user.get("token").equals("")) {
+                i++;
+            }
+        }
+        return i;
     }
 }

@@ -12,17 +12,31 @@ import com.pi4j.wiringpi.SoftPwm;
 public class MotorModel extends Model {
     public MotorModel setSpeed(String socket, boolean l, boolean r, int speed) {
         ServerSingleton.getInstance().log(socket, "[MOTOR] -> Speed is set to " + speed + "%");
+        if (speed != 0) {
+            try {
+                startRotate(l, r, speed / 3);
+                Thread.sleep(500);
+                startRotate(l, r, speed / 2);
+                Thread.sleep(500);
+                startRotate(l, r, speed);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            disableMotorPlus();
+            disableMotorMinus();
+        }
+        return this;
+    }
+
+    private void startRotate(boolean l, boolean r, int speed) {
         if (speed > 0) {
             disableMotorMinus();
             controlDirection(24, 25, l, r, speed);
         } else if (speed < 0) {
             disableMotorPlus();
             controlDirection(28, 29, l, r, speed * -1);
-        } else {
-            disableMotorPlus();
-            disableMotorMinus();
         }
-        return this;
     }
 
     private void controlDirection(int pin_m1, int pin_m2, boolean l, boolean r, int speed) {

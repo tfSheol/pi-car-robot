@@ -7,6 +7,7 @@ import Core.Http.Oauth2;
 import Core.Methode;
 import Core.Model;
 import Core.Route;
+import Core.Singleton.UserSecuritySingleton;
 import Plugin.Server.Model.EmailModel;
 import Plugin.Server.Model.ServerModel;
 import com.pi4j.wiringpi.SoftPwm;
@@ -38,7 +39,7 @@ public class ServerController {
     public Model updateServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         try {
             SoftPwm.softPwmWrite(2, 100);
-            SoftPwm.softPwmWrite(7, 0);
+            UserSecuritySingleton.getInstance().revokUserToken(socket);
             Runtime runtime = Runtime.getRuntime();
             runtime.exec("sudo -u pi git pull");
             runtime.exec("sudo mvn clean compile package");

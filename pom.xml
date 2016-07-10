@@ -95,9 +95,43 @@
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.1</version>
+                <version>1.8</version>
                 <executions>
                     <execution>
+                        <id>pre-clean</id>
+                        <phase>pre-clean</phase>
+                        <configuration>
+                            <tasks>
+                                <echo>Kill current exec</echo>
+                                <exec dir="${project.build.directory}" executable="sudo pkill -f 'java -jar'"
+                                      failonerror="false">
+                                </exec>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>deploy</id>
+                        <phase>deploy</phase>
+                        <configuration>
+                            <tasks>
+                                <echo>Running</echo>
+                                <exec dir="${project.build.directory}" executable="sudo chmod 744 ./launcher.sh"
+                                      failonerror="false">
+                                </exec>
+                                <exec dir="${project.build.directory}" executable="sudo ./launcher.sh"
+                                      failonerror="false">
+                                </exec>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>clean</id>
                         <phase>package</phase>
                         <goals>
                             <goal>run</goal>
@@ -120,11 +154,11 @@
                                 <delete dir="${project.build.directory}/maven-status" includeemptydirs="true"/>
                                 <delete dir="${project.build.directory}/archive-tmp" includeemptydirs="true"/>
                                 <delete dir="${project.build.directory}/generated-sources" includeemptydirs="true"/>
-                                <delete file="${project.build.directory}/${artifactId}-${version}.jar"/>
+                                <delete file="${project.build.directory}/${project.artifactId}-${project.version}.jar"/>
                                 <echo>Rename execute file</echo>
-                                <copy file="${project.build.directory}/${artifactId}-${version}-jar-with-dependencies.jar"
-                                      tofile="${project.build.directory}/${artifactId}.jar"/>
-                                <delete file="${project.build.directory}/${artifactId}-${version}-jar-with-dependencies.jar"/>
+                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar"
+                                      tofile="${project.build.directory}/${project.artifactId}.jar"/>
+                                <delete file="${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar"/>
                             </tasks>
                         </configuration>
                     </execution>

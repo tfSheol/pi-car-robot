@@ -36,7 +36,10 @@ public class ServerController {
     public Model updateServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         try {
             SoftPwm.softPwmWrite(2, 100);
-            Runtime.getRuntime().exec("../scripts/update.sh");
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("cd ../");
+            runtime.exec("sudo -u pi git pull");
+            runtime.exec("sudo -u pi mvn clean compile package deploy");
             System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();

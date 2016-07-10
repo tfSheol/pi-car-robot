@@ -13,9 +13,9 @@ public class LEDTestTask extends Job {
     @Override
     public void task() {
         if (UserSecuritySingleton.getInstance().getNbToken() > 0) {
-            SoftPwm.softPwmWrite(2, 100);
+            SoftPwm.softPwmWrite(7, 100);
         } else {
-            SoftPwm.softPwmWrite(2, 0);
+            SoftPwm.softPwmWrite(7, 0);
         }
     }
 }

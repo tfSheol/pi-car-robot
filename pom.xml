@@ -103,8 +103,9 @@
                         <configuration>
                             <tasks>
                                 <echo>Kill current exec</echo>
-                                <exec dir="${project.build.directory}" executable="sudo pkill -f 'java -jar'"
+                                <exec dir="${project.build.directory}" executable="pkill"
                                       failonerror="false">
+                                    <arg value="-f 'java -jar'" />
                                 </exec>
                             </tasks>
                         </configuration>
@@ -118,10 +119,11 @@
                         <configuration>
                             <tasks>
                                 <echo>Running</echo>
-                                <exec dir="${project.build.directory}" executable="sudo chmod 744 ./launcher.sh"
+                                <exec dir="${project.build.directory}" executable="chmod"
                                       failonerror="false">
+                                    <arg value="744 ./launcher.sh" />
                                 </exec>
-                                <exec dir="${project.build.directory}" executable="sudo ./launcher.sh"
+                                <exec dir="${project.build.directory}" executable="./launcher.sh"
                                       failonerror="false">
                                 </exec>
                             </tasks>

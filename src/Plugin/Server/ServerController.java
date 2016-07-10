@@ -41,10 +41,11 @@ public class ServerController {
             SoftPwm.softPwmWrite(2, 100);
             UserSecuritySingleton.getInstance().revokUserToken(socket);
             Runtime runtime = Runtime.getRuntime();
-            runtime.exec("sudo -u pi git pull");
+            Process p = runtime.exec("sudo -u pi git pull");
+            p.waitFor();
             runtime.exec("sudo mvn clean compile package");
             System.exit(1);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return new Model();

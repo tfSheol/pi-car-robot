@@ -40,6 +40,7 @@ public class ServerController {
             SoftPwm.softPwmWrite(2, 100);
             Runtime runtime = Runtime.getRuntime();
             runtime.exec("sudo -u pi git pull");
+            runtime.exec("cd ../");
             Process p = runtime.exec("sudo mvn clean compile package");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));

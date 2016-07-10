@@ -105,7 +105,8 @@
                                 <echo>Kill current exec</echo>
                                 <exec dir="${project.build.directory}" executable="pkill"
                                       failonerror="false">
-                                    <arg value="-f 'java -jar'" />
+                                    <arg value="-f"/>
+                                    <arg value="'java -jar'"/>
                                 </exec>
                             </tasks>
                         </configuration>
@@ -119,12 +120,10 @@
                         <configuration>
                             <tasks>
                                 <echo>Running</echo>
-                                <exec dir="${project.build.directory}" executable="chmod"
+                                <exec dir="${project.build.directory}" executable="java"
                                       failonerror="false">
-                                    <arg value="744 ./launcher.sh" />
-                                </exec>
-                                <exec dir="${project.build.directory}" executable="./launcher.sh"
-                                      failonerror="false">
+                                    <arg value="-jar"/>
+                                    <arg value="${project.artifactId}.jar"/>
                                 </exec>
                             </tasks>
                         </configuration>

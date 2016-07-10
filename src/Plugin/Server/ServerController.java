@@ -13,6 +13,7 @@ import com.pi4j.wiringpi.SoftPwm;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by teddy on 29/05/2016.
@@ -38,7 +39,9 @@ public class ServerController {
             SoftPwm.softPwmWrite(2, 100);
             Runtime runtime = Runtime.getRuntime();
             runtime.exec("sudo -u pi git pull");
-            runtime.exec("sudo mvn clean compile package");
+            Process test = runtime.exec("sudo mvn clean compile package");
+            InputStream out = test.getInputStream();
+            System.out.println(out.read());
             System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();

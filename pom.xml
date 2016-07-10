@@ -120,10 +120,10 @@
                         <configuration>
                             <tasks>
                                 <echo>Running</echo>
-                                <exec dir="${project.build.directory}" executable="java"
+                                <exec dir="${project.basedir}" executable="java"
                                       failonerror="false">
                                     <arg value="-jar"/>
-                                    <arg value="${project.artifactId}.jar"/>
+                                    <arg value="${project.build.directory}/${project.artifactId}.jar"/>
                                 </exec>
                             </tasks>
                         </configuration>

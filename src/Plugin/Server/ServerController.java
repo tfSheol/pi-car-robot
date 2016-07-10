@@ -12,8 +12,9 @@ import Plugin.Server.Model.ServerModel;
 import com.pi4j.wiringpi.SoftPwm;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by teddy on 29/05/2016.
@@ -39,9 +40,14 @@ public class ServerController {
             SoftPwm.softPwmWrite(2, 100);
             Runtime runtime = Runtime.getRuntime();
             runtime.exec("sudo -u pi git pull");
-            Process test = runtime.exec("sudo mvn clean compile package");
-            InputStream out = test.getInputStream();
-            System.out.println(out.read());
+            Process p = runtime.exec("sudo mvn clean compile package");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            in.close();
             System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();

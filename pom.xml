@@ -114,8 +114,8 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>deploy</id>
-                        <phase>deploy</phase>
+                        <id>package</id>
+                        <phase>package</phase>
                         <configuration>
                             <tasks>
                                 <echo>Running</echo>
@@ -134,7 +134,7 @@
                     </execution>
                     <execution>
                         <id>clean</id>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>

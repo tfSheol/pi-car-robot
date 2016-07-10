@@ -38,7 +38,7 @@ public class ServerController {
             SoftPwm.softPwmWrite(2, 100);
             Runtime runtime = Runtime.getRuntime();
             runtime.exec("sudo -u pi git pull");
-            runtime.exec("sudo -u pi mvn clean compile package deploy");
+            runtime.exec("sudo -u pi mvn clean compile package");
             System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();

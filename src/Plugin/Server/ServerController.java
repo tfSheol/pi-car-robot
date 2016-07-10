@@ -38,6 +38,7 @@ public class ServerController {
     public Model updateServer(String socket, Oauth2 oauth2, Header header, JSONObject jsonObject, Map args) {
         try {
             SoftPwm.softPwmWrite(2, 100);
+            SoftPwm.softPwmWrite(7, 0);
             Runtime runtime = Runtime.getRuntime();
             runtime.exec("sudo -u pi git pull");
             runtime.exec("sudo mvn clean compile package");

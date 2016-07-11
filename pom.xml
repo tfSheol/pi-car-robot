@@ -147,8 +147,6 @@
                                 <copy file="./ip.properties" tofile="${project.build.directory}/ip.properties"/>
                                 <echo>Add Launcher script</echo>
                                 <copy file="./scripts/launcher.sh" tofile="${project.build.directory}/launcher.sh"/>
-                                <echo>Add update file</echo>
-                                <copy file="./scripts/update.sh" tofile="${project.build.directory}/update.sh"/>
                                 <echo>Clean target folder</echo>
                                 <delete dir="${project.build.directory}/classes" includeemptydirs="true"/>
                                 <delete dir="${project.build.directory}/surefire" includeemptydirs="true"/>
